@@ -1,0 +1,246 @@
+------------------------------------------------------------CONFIG DE BASE---------------------------------------------------------------------
+
+- CONFIGURER UN SWITCH
+
+hostname SW1
+enable secret class
+banner motd ^CUnauthorized Access is ProhibitedC^
+line con 0
+ password class
+ login
+line vty 0 4
+ password cisco
+ login
+end
+copy run start
+
+
+
+
+- IP :
+interface GigabitEthernet0/0
+ description Connected to SW1 port G1/1
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+interface GigabitEthernet0/1
+ description Connected to SW2 port G1/1
+ ip address 10.10.20.1 255.255.255.0
+ no shutdown
+ 
+- acceder a un range d'ip
+interface range f0/1-8
+
+
+- Activer l'interface Vlan + ajout d'une ip:
+interface VLAN 99
+no shutdown
+ip address 192.168.1.2 255.255.255.0
+no shutdown
+ipv6 address 2001:db8:acad:1::2/64
+ipv6 address fe80::2 link-local  =>  lien pas utiliser par les routeur, utiliser pour joindre les voisins, obliger d'en avoir une
+no shutdown
+
+
+- attribuer tout les port a un vlan :
+interface range gig1/0/1 – 24
+switchport access vlan 99
+exit
+
+
+- ajouter un mdp pour l'acces au mode console :
+line con 0
+logging synchronous  => empeche les messages de console d'interrompre les commandes
+password cisco
+login
+exit
+
+
+
+- configurer les line vty pour cela il faut juste leur ajouter un mdp pour pouvoir autoriser l'acces a Telnet :
+line vty 0 15
+password cisco
+login
+exit
+
+
+- configurer les lignes vty locaux (tp 1.3.6): 
+line vty 0 15
+login local    
+transport input ssh 
+no password cisco 
+
+
+
+- mettre le nom de domaine netacad.pka : 
+S1(config)# ip domain-name netacad.pka
+
+
+
+- crypter les données avec les clés RSA d'une longeur de 1024 :
+S1(config)# crypto key generate rsa
+ensuite mettre 1024
+
+
+- créer un utilisateur ainsi que son mdp secret :
+switch(config)#username utilisateur secret mdp
+
+
+- show ip interface brief | exclude unassigned => permet d'exclure les interface de sortie qui n'ont aucune IP
+
+- show ip route | begin Gate => donner l'IP de la passerelle par defaut 
+
+- pour changer l'ipv6 il faut supprimer l'ancienne => no ipv6 ip
+
+- MDP chiffé : R1(config)# service password-encryption
+
+- donnée un mdp avec minimum 12 caractére min : R1(config)# security passwords min-length 12
+
+-criptage avec un module 1024 : R1(config)# crypto key generate rsa general-keys modulus 1024
+
+- donner un mdp au ligne console et config pour que les sessions se deco apres 4 min :
+conf t
+line console 0
+password $cisco!!CON*
+exec-timeout 4 0
+login
+
+
+-donner un mdp au ligne vty, config pour qu'il accepte uniquement les connexions ssh, 
+config pour que les sessions se deco apres 4 min et activer la connexion a l'aide de la base de donnée local
+conf t
+line vty 0 4
+password $cisco!!VTY*
+exec-timeout 4 0
+transport input ssh
+login local
+
+
+- activer le routage IPV6 : R1(config)# ipv6 unicast-routing
+
+
+- config interface avec des descriptions :
+
+conf t
+interface g0/0/0
+ip address 192.168.0.1 255.255.255.0
+ipv6 address fe80::1 link-local
+ipv6 address 2001:db8:acad::1/64
+description Connection to Server
+no shutdown
+exit
+interface g0/0/1
+ip address 192.168.1.1 255.255.255.0
+ipv6 address fe80::1 link-local
+ipv6 address 2001:db8:acad:1::1/64
+description Connection to S1
+no shutdown
+exit
+interface loopback0
+ip address 10.0.0.1 255.255.255.0
+ipv6 address fe80::1 link-local
+ipv6 address 2001:db8:acad:2::1/64
+description loopback adapter
+no shutdown
+exit
+
+
+-Bloguer les connexions vty pendant 2 min apres 3 tentatives e, 1 min :
+login block-for 120 attempts 3 within 60
+exit
+
+
+- configurer l'horloge : R1# clock set 14:53:00 05 Dec 2022
+
+--------------------------------------------------------------VLAN------------------------------------------------------------------------
+
+- Créer un Vlan et lui donné un nom :
+vlan 10
+name Faculty/staff
+
+
+- afficher les nom des vlan + details: 
+show vlan brief
+
+
+- Atribuer les vlan a des ports actif : 
+interface f0/11
+switchport mode access        => activer le port d'accés 
+switchport access vlan 10     => l'assigner a un vlan, si le vlan n'existe pas il le crée 
+
+
+- Permet le traffic vocal: 
+interface f0/11
+mls qos trust cos
+switchport voice vlan 150
+
+
+
+- Activer un port en mode trunk :
+interface range g0/1 -2
+switchport mode trunk
+switchport trunk native vlan 99   => mettre le vlan 99 en tant que vlan natif 
+
+
+- supprimer l'ip de gestion sur un vlan  et l'ajouter a un autre vlan :
+interface vlan 1
+no ip address    => supprimer l'ip de gestion
+interface vlan 99
+ip address 192.168.1.11 255.255.255.0
+end
+
+- supprimer un interface d'un vlan :  => se reasigne automatiquement au vlan 1 apres l'avoir retirer d'un vlan
+interface f0/24
+no switchport access vlan 
+end
+
+- desactiver un vlan :  => remarque : si vlan est associer a un port, ce port sera lui aussi desactiver, du coup show vlan brief pour voir si il a des ports deja atribuer
+no vlan 30
+end
+
+
+
+------------------------------------------------------------MODE TRUNK--------------------------------------------------------------------- 
+trunk => liaison ayant pour but de véhiculer le trafic de plusieurs vlans
+
+- voir les interface en mode trunk:
+show interface trunk
+
+- voir les interface en mode DTP => Dynamic Trunking Protocol :
+show dtp
+
+- configurer un interface et le mettre en mode DTP :
+interface f0/1
+switch mode dynamic desirable
+
+- forcer un port au trunking :
+interface f0/1
+switchport mode trunk
+
+- config trunk en changeant son vlan natif :
+interface f0/1
+switchport trunk native vlan 1000
+
+
+- config une route statique en desactivant le DTP :
+interface g0/2
+switchport mode trunk
+switchport nonegotiate
+
+
+- acceder/créer a une sous interface  ,regler son type d'encapsulation et son vlan :
+  encapsulation 802.1Q (dot1q) => Résulte de l'utilisation de vlan natif et du fait que 802.1Q autorise la double
+  encapsulation des trames. 
+ 
+	int g0/0.10
+	encapsulation dot1q 10
+	ip address 172.17.10.1 255.255.255.0
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+
+!
+! Last configuration change at 14:00:50 UTC Wed Mar 22 2023 by Admin
+!
+version 17.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname AG9_PRT1_DV
+!
+boot-start-marker
+boot system flash:isr4221-universalk9_ias.17.06.05.SPA.bin
+boot-end-marker
+!
+!
+no logging console
+enable secret 9 $9$caBvQ4ybOWDsa.$S4xyVKHhc.EWTqRO34UPgCZQFSqmMeasnBDEPvCNN.M
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip domain name ag9.lan
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+crypto pki trustpoint TP-self-signed-2551293610
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2551293610
+ revocation-check none
+ rsakeypair TP-self-signed-2551293610
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01 nvram:CiscoLicensi#1CA.cer
+crypto pki certificate chain TP-self-signed-2551293610
+ certificate self-signed 01 nvram:IOS-Self-Sig#7.cer
+!
+!
+license udi pid ISR4221/K9 sn FGL2402LEAT
+memory free low-watermark processor 67594
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+username Admin password 7 047C2D070826435A
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ ip address 172.30.90.1 255.255.255.252
+ negotiation auto
+!
+interface Serial0/2/0
+ no ip address
+!
+interface Serial0/2/1
+ no ip address
+!
+no ip http server
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd 
+All unauthorized access are stricly prohibited and tresspassers will be persecuted
+!
+line con 0
+ password 7 0221225A0C010035
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password 7 047C2D070826435A
+ login local
+ transport input ssh
+line vty 5 15
+ password 7 047C2D070826435A
+ login local
+ transport input ssh
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+!
+!
+!
+!
+!
+!
+end

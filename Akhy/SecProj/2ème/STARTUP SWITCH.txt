@@ -1,0 +1,237 @@
+Current configuration : 5774 bytes
+!
+! Last configuration change at 00:26:16 UTC Mon Mar 1 1993
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname AG9_PSW1_DV
+!
+boot-start-marker
+boot-end-marker
+!
+no logging console
+enable secret 4 G.DII8xaNfvoCcpQtzVgHhkqoiLmw9L3ovYSbJahlSk
+!
+username admin secret 4 bHv0jUKHUEoQXnCFell8/M.y6a7pQsAA8nMdws2ME/k
+username admin2 secret 4 bHv0jUKHUEoQXnCFell8/M.y6a7pQsAA8nMdws2ME/k
+no aaa new-model
+system mtu routing 1500
+!
+!
+ip domain-name ag9.lan
+!
+!
+crypto pki trustpoint TP-self-signed-1902404352
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1902404352
+ revocation-check none
+ rsakeypair TP-self-signed-1902404352
+!
+!
+crypto pki certificate chain TP-self-signed-1902404352
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 31393032 34303433 3532301E 170D3933 30333031 30303030
+  35355A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 39303234
+  30343335 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100A46A F0B7D6A6 37BE9625 828FB562 DAD0E4A6 0B466A03 B2CDF05B 839ED62B
+  6C4EFC39 EFBC8B53 91C8202F 4F27F661 E9AE69D0 DDDBA08B D8688A4C E393F59D
+  63C8D3F6 2F193FC5 25EB2CFC B1FA88EB 8243FBD7 00E62247 1704BB38 DEB6C9F3
+  FC462565 99241615 B9331BFF 14E8824D FF4356E2 31227429 C9C65F94 6F17CE30
+  ED8F0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 14AC0D6A 25F3A71F 714A3D1A 7CF7A9E3 66E57C57 AE301D06
+  03551D0E 04160414 AC0D6A25 F3A71F71 4A3D1A7C F7A9E366 E57C57AE 300D0609
+  2A864886 F70D0101 05050003 81810092 0BE62D37 CA4983F3 DF11446A FA0ECBDF
+  F73A50C5 F084CEDA 1CD1D361 66836A2C 9BA2131C 4303D2D0 BAF17715 5800F13A
+  F3D685D7 578FBD2B 8591D38B 87536531 94BFD383 ADD3CA19 379C25F8 B24D5A58
+  19584EF1 E2F8F92D 7CA08694 E09ABDF7 89129594 5BA06C74 4F8A1680 D0FCA6B1
+  623FCC6E 798FAC11 7D580172 F13534
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/2
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/3
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/4
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/5
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/6
+ switchport access vlan 10
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/7
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/8
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/9
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/10
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/11
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/12
+ switchport access vlan 30
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/13
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/14
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/15
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/16
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/17
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/18
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/19
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/20
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/21
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/22
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/23
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface FastEthernet0/24
+ switchport access vlan 70
+ switchport trunk native vlan 99
+ switchport mode access
+!
+interface GigabitEthernet0/1
+ switchport access vlan 100
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport access vlan 50
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 172.30.10.1 255.255.254.0
+!
+interface Vlan30
+ ip address 172.30.30.1 255.255.255.0
+!
+interface Vlan50
+ ip address 172.30.50.1 255.255.255.0
+!
+interface Vlan70
+ ip address 172.30.70.1 255.255.255.0
+!
+interface Vlan99
+ ip address 172.30.99.1 255.255.255.0
+!
+interface Vlan100
+ no ip address
+!
+ip http server
+ip http secure-server
+!
+!
+line con 0
+ password 7 0112015D4B18115E255A
+ login
+line vty 0 4
+ password 7 1304104B1B1F137B2F32
+ login local
+line vty 5 15
+ password 7 1304104B1B1F137B2F32
+ login local
+!
+end

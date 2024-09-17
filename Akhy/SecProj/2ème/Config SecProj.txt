@@ -1,0 +1,99 @@
+NOM:
+
+Router : hostname AG9_PRT1_DV
+Switch : hostname AG9_PSW1_DV
+Firewall : AG9_PFW1_DV
+PC1 : AG9_PPC1_DV
+PC2: AG9_PPC2_DV
+
+CONFIG SWITCH:
+
+service password-encryption
+enable secret ag9psw1dv
+line con 0
+password ag9psw1dv
+login
+exit
+line vty 0 15  
+password ag9psw1dv
+login local
+end
+
+banner motd #
+Unauthorized access is strictly prohibited, if you need permissions contact Nielsou or Akhy
+ #
+
+
+ip domain name ag9.lan
+crypto key generate rsa
+2048
+
+username admin secret password ag9psw1dv
+username admin2 secret password ag9psw1dv
+
+CONFIG ROUTEUR:
+
+service password-encryption
+enable secret ag9prt1dv
+line con 0
+password ag9prt1dv
+login
+exit
+line vty 0 15  
+password ag9prt1dv
+login local
+end
+
+banner motd ^Unauthorized Access is Prohibited^
+
+
+ip domain name ag9.lan
+crypto key generate rsa
+2048
+
+username admin password ag9prt1dv
+username admin2 password ag9prt1dv
+
+VLANS :
+
+vlan 10
+name Users
+ip address 172.30.10.1
+vlan 30
+name Management
+ip address 172.30.30.1
+vlan 50
+name Server
+ip address 172.30.50.1
+vlan 70
+name Voip
+ip address 172.30.70.1
+vlan 99
+name native
+ip address 172.30.99.1
+vlan 100
+name reserved
+ip address 172.30.100.1
+
+----VLAN 10
+interface range fa0/1 - 0/6
+switchport mode access
+switchport access vlan 10
+
+----VLAN 30
+interface range fa0/7 - 0/12
+switchport mode access
+switchport access vlan 30
+
+----VLAN 50
+interface range fa0/13 - 0/18
+switchport mode access
+switchport access vlan 50
+interface Gi0/1
+switchport mode access
+switchport access vlan 50
+
+----VLAN 70
+interface range fa0/19 - 0/24
+switchport mode access
+switchport access vlan 70

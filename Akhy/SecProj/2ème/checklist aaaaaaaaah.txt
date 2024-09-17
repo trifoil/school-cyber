@@ -1,0 +1,57 @@
+Router)
+ACL https://routeur.clemanet.com/acl-cisco.php
+Routage statique OK
+PAT/Pool IP/ACL OK
+
+
+
+Port Forwarding/NAT Stat
+
+Switch)
+STP rapid / BPDUG / priori / portfast OK
+
+spanning-tree mode rapid-pvst
+spanning-tree portfast bpduguard # à mettre sur les interfaces utilisateurs
+spanning-tree port-priority <priority> # mettre la priority la plus basse sur le vlan management
+
+mettre les interfaces inutilisées dans le vlan 99 OK
+
+VTP Transparent, domain : OK
+vtp domain Grandmetriclabs.con
+vtp password cisco
+vtp mode transparent
+
+DHCP / DHCP SNOOPING : OK
+
+ip dhcp snooping limit rate 20
+ip dhcp snooping trust
+
+CPD / LLDP à désac OK 
+
+no service tcp-small-servers
+no service udp-small servers
+
+Port mirroring
+
+Port security : OK
+int range f0/1-24
+switchport port-security
+switchport port-security maximum 11
+switchport port-security violation shutdown
+
+retirer mode shutdown quand il y a une violation : OK
+errdisable recovery cause all
+errdisable recovery cause bpduguard
+errdisable recovery cause psecure-violation
+
+Firewall)
+Règles FW
+Log
+
+Services)
+TFTP sur le routeur si il y'a modif de fichier
+HTTP DMZ
+DHCP OK
+AAA 3ème
+Syslog server
+QoS à faire
