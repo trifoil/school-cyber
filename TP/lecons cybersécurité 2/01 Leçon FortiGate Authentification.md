@@ -18,4 +18,36 @@ Votre travail doit vous permettre de répondre aux questions suivantes :
     Pourquoi doit-on parfois exempter certains périphériques de l’authentification par portail captif ?
     Citez trois méthodes permettant de garantir l’authentification actives des utilisateurs.
 
-## 
+## Reponses
+
+### Méthodes d’authentification des utilisateurs sur FortiGate
+
+* Par le pare-feu
+* Par mdp local
+* Par authentification par serveur
+    * Créer un compte utilisateur de type « Remote » et spécifier le serveur qui contiendra/vérifiera les identifiants
+    * Ajouter un serveur d'authentification à un groupe d'utilisateurs et ajouter le groupe d'utilisateur à une règle de pare-feu
+* Auth à deux facteurs
+* FortiToken assigné à un ustilisateur
+* Authentification active
+* Authentification passive
+
+
+### Méthodes comme 2ème facteur pour l’authentification ?
+
+* OTP (one time password), mdp à usage unique
+* 
+
+### Expliquez les notions d’authentification active et passive. Que se passe-t-il si les deux méthodes sont activées ?
+
+* si auth active + passive -> l'authentification active est utilisée comme backup en cas d'échec de l'authentification passive
+
+### Citez les quatre types de groupes d’utilisateurs.
+
+### Pourquoi faut-il parfois ajouter les services http et DNS dans les règles de pare-feu utilisant.
+
+### Expliquez ce qu’est un portail captif.
+
+### Pourquoi doit-on parfois exempter certains périphériques de l’authentification par portail captif ?
+
+### Citez trois méthodes permettant de garantir l’authentification actives des utilisateurs.
