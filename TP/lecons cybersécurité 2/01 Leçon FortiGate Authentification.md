@@ -44,6 +44,11 @@ Votre travail doit vous permettre de répondre aux questions suivantes :
 l'authentification ```active = backup``` (si d'échec de l'authentification passive)
 ### Citez les quatre types de groupes d’utilisateurs.
 
+* ```Firewall``` user group
+* ```Guest``` user group
+* ```Fortinet Single Sign-On``` (FSSO) user group
+* ```RADIUS Single Sign-On``` (RSSO) user group
+
 ### Pourquoi faut-il parfois ajouter les services http et DNS dans les règles de pare-feu utilisant.
 
 ### Expliquez ce qu’est un portail captif.
