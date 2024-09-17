@@ -18,6 +18,34 @@ Votre travail doit vous permettre de répondre aux questions suivantes :
     Pourquoi doit-on parfois exempter certains périphériques de l’authentification par portail captif ?
     Citez trois méthodes permettant de garantir l’authentification actives des utilisateurs.
 
+Préparez l’implémentation de l’authentification que vous mettrez en œuvre sur le FortiGate de votre site/agence lors des séances de travaux pratiques.
+
+Durée : 40 minutes.
+
+Déterminez quel(s) accès vous souhaitez protéger avec une authentification.
+
+Listez les paramètres de configuration dont vous aurez besoin pour la configuration de l’authentification.
+
+    Où seront stocké les identifiants ?
+    Utiliserez-vous l’authentification à deux facteur ?
+    Allez-vous utiliser un portail captif ?
+    … 
+
+Préparez votre script ou complétez la liste des paramètres en indiquant la valeur qui devra être configurée pour chacun d'eux.
+
+    Combien de temps un utilisateur peut-il rester inactif avant de devoir s'authentifier à nouveau ?
+    Quelle est l’adresse IP du serveur d’authentification ?
+    Quelles conditions d’utilisation (Disclaimer) les utilisateurs devront-ils accepter pour poursuivre l’accès ?
+    …
+
+Comment allez-vous tester votre configuration ?
+
+Estimez le temps nécessaire à la mise en œuvre sur site.
+
+Planifiez votre intervention (à quel date/heure prévoyez-vous cette intervention ? D’autres configurations doivent-elles encore être réalisées avant celle-ci ?, …). Le cas échéant, réorganisez les autres tâches.
+
+Dans votre planification, avez-vous pris en compte les points de votre checklist méthodologique ?
+
 ## Reponses
 
 ### Méthodes d’authentification des utilisateurs sur FortiGate
