@@ -44,15 +44,37 @@ Votre travail doit vous permettre de répondre aux questions suivantes :
 l'authentification ```active = backup``` (si d'échec de l'authentification passive)
 ### Citez les quatre types de groupes d’utilisateurs.
 
-* ```Firewall``` user group
-* ```Guest``` user group
-* ```Fortinet Single Sign-On``` (FSSO) user group
-* ```RADIUS Single Sign-On``` (RSSO) user group
+* ```Firewall``` user group     
+localement au niveau d'une règle de pare-feu afin d'autoriser des accès uniquement à certains groupes d'utilisateurs        
+User & Device > User Groups > Create New
+* ```Guest``` user group       
+accès invités réseaux sans fil.         
+ce type de compte contient le compte entier.        
+expirent après une période prédéterminée
+* ```Fortinet Single Sign-On``` (FSSO) user group   
+pour l'authentification unique et passive
+* ```RADIUS Single Sign-On``` (RSSO) user group     
+pour l'authentification unique et passive
 
 ### Pourquoi faut-il parfois ajouter les services http et DNS dans les règles de pare-feu utilisant.
+
+* http requis pour afficher la boite de dialogue de l'auth active
+* résolution du nom d'hôte est souvent requise par le protocole de couche application, utilisé pour l'authentification (pas besoin d'auth)
 
 ### Expliquez ce qu’est un portail captif.
 
 ### Pourquoi doit-on parfois exempter certains périphériques de l’authentification par portail captif ?
 
 ### Citez trois méthodes permettant de garantir l’authentification actives des utilisateurs.
+
+* Activer l'authentification dans chaque règle de pare-feu qui pourrait correspondre au trafic.
+* Appliquer l'option d'authentification à la demande (CLI uniquement).      
+    ```
+    # config user setting
+    (setting) # set auth-on-demand <always|implicit>
+    ```
+    * Implicit (défaut)         
+    ne déclenchera pas l'authentification de l’utilisateur si autre règle sans authentification qui autorise le trafic.
+    * Always        
+    toujours auth pour les règles avec auth active activée.
+* Activer un portail captif sur l'interface d'entrée du trafic.
