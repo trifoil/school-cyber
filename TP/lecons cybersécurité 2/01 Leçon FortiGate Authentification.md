@@ -35,13 +35,13 @@ Votre travail doit vous permettre de répondre aux questions suivantes :
 
 ### Méthodes comme 2ème facteur pour l’authentification ?
 
-* OTP (one time password), mdp à usage unique
+* OTP = ```One Time Password```
 * 
 
 ### Expliquez les notions d’authentification active et passive. Que se passe-t-il si les deux méthodes sont activées ?
 
-* si auth active + passive -> l'authentification active est utilisée comme backup en cas d'échec de l'authentification passive
-
+* si auth active + passive :    
+l'authentification ```active = backup``` (si d'échec de l'authentification passive)
 ### Citez les quatre types de groupes d’utilisateurs.
 
 ### Pourquoi faut-il parfois ajouter les services http et DNS dans les règles de pare-feu utilisant.
