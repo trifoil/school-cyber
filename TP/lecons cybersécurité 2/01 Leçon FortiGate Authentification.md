@@ -46,7 +46,7 @@ Planifiez votre intervention (à quel date/heure prévoyez-vous cette interventi
 
 Dans votre planification, avez-vous pris en compte les points de votre checklist méthodologique ?
 
-## Reponses
+## Reponses theoriques
 
 ### Méthodes d’authentification des utilisateurs sur FortiGate
 
@@ -87,11 +87,16 @@ pour l'authentification unique et passive
 ### Pourquoi faut-il parfois ajouter les services http et DNS dans les règles de pare-feu utilisant.
 
 * http requis pour afficher la boite de dialogue de l'auth active
-* résolution du nom d'hôte est souvent requise par le protocole de couche application, utilisé pour l'authentification (pas besoin d'auth)
+* Résolution du nom d'hôte est souvent requise par le protocole de couche application, utilisé pour l'authentification (pas besoin d'auth)
 
 ### Expliquez ce qu’est un portail captif.
 
+* Permet une authentification des utilisateurs via une page Web
+* Le portail captif est activé au niveau d'une interface
+
 ### Pourquoi doit-on parfois exempter certains périphériques de l’authentification par portail captif ?
+
+ Certains appareils ne sont pas capables de s'authentifier
 
 ### Citez trois méthodes permettant de garantir l’authentification actives des utilisateurs.
 
@@ -106,3 +111,6 @@ pour l'authentification unique et passive
     * Always        
     toujours auth pour les règles avec auth active activée.
 * Activer un portail captif sur l'interface d'entrée du trafic.
+
+## Reponses labo
+
