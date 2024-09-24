@@ -55,11 +55,23 @@ Où peut-on stocker les journaux générés par un FortiGate ?
 Citez les types de journaux disponibles sur un FortiGate. Quel genre d’informations chacun de ces types de journaux enregistre-t-il ?
 
 * Traffic Logs (Les journaux de trafic)
-    * 
-* 
-    * 
-* 
-    * 
+    * Ils enregistrent des informations sur le trafic qui traverse le FortiGate
+    * 3 sous-types : forward, local et sniffer
+        * Journaux de trafic Forward        
+        Ils contiennent des informations sur le trafic qui a été autorisé ou bloqué par le FW.
+        * Journaux de trafic Local      
+        Ils contiennent des informations sur le trafic de et vers l'IP de gestion de l'UTM.         
+        Par exemple, les connexions en GUI et les requêtes vers les services FortiGuard.
+        * Journaux de trafic Sniffer
+        Ils enregistrent tout le trafic passant par l'interface configurée en One-Arm Sniffer
+        Ce trafic peut ainsi être examiné séparément des autres journaux.
+
+* Event Logs (Les journaux d'événements)
+    * Ils enregistrent les événements système et d'administration
+    * 3 sous-types : System, User, Autres
+
+* Security logs (Les journaux de sécurité)
+
 
 Citez dans l’ordre les niveaux de sévérité des journaux.
 Un FortiAnalyzer/FortiManager doit-il être dans le même réseau qu’un FortiGate pour que celui-ci puisse lui envoyer ses logs ?
