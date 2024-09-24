@@ -1,0 +1,13 @@
+enable
+configure terminal
+hostname R1
+enable secret class
+banner motd ^CUnauthorized Access is ProhibitedC^
+line con 0
+ password class
+ login
+line vty 0 4
+ password cisco
+ login
+end
+copy run start
