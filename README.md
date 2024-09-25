@@ -4,16 +4,14 @@
 
 ## Config de minicom
 
-Pour voir le point de montage de la console série (normalement /dev/ttyUSB0) :
 
 ```
-udo dnf install minicom
+sudo dnf install minicom
 ```
 
 Pour lancer :
 ```
 sudo minicom -D /dev/ttyUSB0 -b 9600
-
 ```
 
 ## Config de screen
