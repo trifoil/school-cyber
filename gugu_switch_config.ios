@@ -1,0 +1,55 @@
+enable
+configure terminal
+
+vlan 10
+name Users
+exit
+interface vlan 10
+ip address 172.30.10.1 255.255.254.0
+no shutdown
+exit
+
+vlan 30
+name Management
+exit
+interface vlan 30
+ip address 172.30.30.1 255.255.255.0
+no shutdown
+exit
+
+vlan 50
+name Servers
+exit
+interface vlan 50
+ip address 172.30.50.1 255.255.255.0
+no shutdown
+exit
+
+! Users VLAN (Access Mode):
+
+interface range GigabitEthernet 1/0/1-10
+switchport mode access
+switchport access vlan 10
+exit
+
+! Management VLAN:
+
+interface range GigabitEthernet 1/0/11-20
+switchport mode access
+switchport access vlan 30
+exit
+
+! Server VLAN:
+
+interface range GigabitEthernet 1/0/21-23
+switchport mode access
+switchport access vlan 50
+exit
+
+! Trunk Port Configuration (Assuming the trunk is on port GigabitEthernet0/24 for communication between the switch and Fortinet):
+
+interface GigabitEthernet 1/0/24
+switchport mode trunk
+switchport trunk allowed vlan 10,30,50
+no shutdown
+exit
