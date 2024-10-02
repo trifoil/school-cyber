@@ -79,6 +79,9 @@ Pwd: @0Test123*
 Management Network Interface:
 
 ```
+GigabitEthernet0/0/0 => WAN1 (192.168.0.138/30 255.255.255.252)
+GigabitEthernet0/0/1 => FW (172.30.200.1/30 255.255.255.252) .1 pour l'interface
+GigabitEthernet0/0/2
 GigabitEthernet0/0/3
 ```
 
