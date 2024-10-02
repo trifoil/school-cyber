@@ -111,25 +111,25 @@ ACL
 
     - Règles de pare-feu :  
 
-    - Règles entrantes (http, HTTPS) 
+      * Règles entrantes (http, HTTPS) 
 
-    - règles sortantes 
+      * règles sortantes 
 
-    - Négation par défaut 
+      * Négation par défaut 
 
-    - Filtrage web 
+      * Filtrage web 
 
-    - Catégories de sites à bloquer ou autoriser 
+      * Catégories de sites à bloquer ou autoriser 
 
-    - Liste noires et blanches 
+      * Liste noires et blanches 
 
-    - Analyse du contenu pour détecter et bloquer les menaces potentielles 
+      * Analyse du contenu pour détecter et bloquer les menaces potentielles 
 
-    - Contrôle d’application 
+      * Contrôle d’application 
 
-    - Identification des applications 
+      * Identification des applications 
 
-    - Politiques par application 
+      * Politiques par application 
 
     - Gestion de la bande passante 
 
@@ -182,21 +182,21 @@ ACL
 
     - Mettre en place des mécanismes de redondance pour assurer la continuité du service en cas de défaillance matérielle tels que : 
 
-    - Identifier les composants critiques en premier 
+      - Identifier les composants critiques en premier 
 
-    - HSRP (Hot Standby Router Protocol) pour assurer la continuité du service en cas de défaillance matérielle 
+      - HSRP (Hot Standby Router Protocol) pour assurer la continuité du service en cas de défaillance matérielle 
 
-    - Mettre en place de la redondance physique (serveurs miroirs, routeurs doublés, liaisons montantes multiples) 
+      - Mettre en place de la redondance physique (serveurs miroirs, routeurs doublés, liaisons montantes multiples) 
 
-    - Agrégation de liens : Etherchannel pour combiner plusieurs liens physiques en un seul lien logique 
+      - Agrégation de liens : Etherchannel pour combiner plusieurs liens physiques en un seul lien logique 
 
-    - Plan de basculement : Etablir des plans de basculement automatiques ou manuels pour les services critiques pour assurer une transition transparente vers des systèmes de secours en cas de panne 
+      - Plan de basculement : Etablir des plans de basculement automatiques ou manuels pour les services critiques pour assurer une transition transparente vers des systèmes de secours en cas de panne 
 
-    - Tests de redondance : effectuer régulièrement des tests de redondance pour vérifier l’efficacité des mécanismes de redondance 
+      - Tests de redondance : effectuer régulièrement des tests de redondance pour vérifier l’efficacité des mécanismes de redondance 
 
-    - Documenter tout 
+      - Documenter tout 
 
-    - Mettre en place système de surveillance et alertes 
+      - Mettre en place système de surveillance et alertes 
 
 
 11. Mise en place du monitoring  11
