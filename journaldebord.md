@@ -89,15 +89,15 @@
 - Pas de problèmes majeurs rencontrés. (Temps de réponse FW)
 
 #### Planification des tâches pour le cours suivant
-- **Router** : Gestion SSH
-- **Firewall** : Création interface DMZ + Création interface WAN2 + assignation des adresses IP statiques + Ajout SSH
-- **Switch** : /
+- **Router** : Gestion SSH + Banner motd
+- **Firewall** : Création interface DMZ + Création interface WAN2 + assignation des adresses IP statiques + Banner motd
+- **Switch** : Banner motd + SSH
 
 ---
 
 #### [03/10]
 - **Router**
-  - Tâches :
+  - Tâches : 
     - 
 
 - **Firewall**
