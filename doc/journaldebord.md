@@ -97,16 +97,16 @@
 
 #### [03/10]
 - **Router**
-  - Tâches : SSH + banner + timeout 
-    - 
+  - Tâches : 
+    - SSH + banner + timeout 
 
 - **Firewall**
-  - Tâches : DMZ + WAN 2 + IP statiques DMZ & WAN 2 + banner + timeout
-    - 
+  - Tâches : 
+    - DMZ + WAN 2 + IP statiques DMZ & WAN 2 + banner + timeout
 
 - **Switch**
-  - Tâches : SSH + banner + timeout
-    - 
+  - Tâches : 
+    - SSH + banner + timeout
 
 
 #### Problèmes rencontrés
