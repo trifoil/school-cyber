@@ -89,32 +89,32 @@
 - Pas de problèmes majeurs rencontrés. (Temps de réponse FW)
 
 #### Planification des tâches pour le cours suivant
-- **Router** : Gestion SSH + Banner motd
-- **Firewall** : Création interface DMZ + Création interface WAN2 + assignation des adresses IP statiques + Banner motd
-- **Switch** : Banner motd + SSH
+- **Router** : Gestion SSH + Banner motd + Timeout après 3 essais et après 5 min d'inactivité 
+- **Firewall** : Création interface DMZ + Création interface WAN2 + assignation des adresses IP statiques + Banner motd + Timeout après 3 essais et après 5 min d'inactivité 
+- **Switch** : Banner motd + SSH + Timeout après 3 essais et après 5 min d'inactivité 
 
 ---
 
 #### [03/10]
 - **Router**
-  - Tâches : 
+  - Tâches : SSH + banner + timeout 
     - 
 
 - **Firewall**
-  - Tâches :
+  - Tâches : DMZ + WAN 2 + IP statiques DMZ & WAN 2 + banner + timeout
     - 
 
 - **Switch**
-  - Tâches :
+  - Tâches : SSH + banner + timeout
     - 
 
 
 #### Problèmes rencontrés
-- 
+- Problème SSH sur le switch étant donné mauvaise version IOS 
 
 #### Planification des tâches pour le cours suivant
-- **Router** : 
-- **Firewall** : 
-- **Switch** : 
+- **Router** : /
+- **Firewall** : règles fw
+- **Switch** : /
 
 ---
