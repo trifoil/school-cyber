@@ -177,12 +177,14 @@
 
 - **Firewall**
 
-  - ## Tâches :
+  - Tâches:
+    - ajout d'une police de pwd
 
 - **Switch**
   - Tâches :
     - création script de la configuration de base
     - Suppression des interfaces sur la VLAN 1
+    - ajout d'une police de pwd
 
 #### Problèmes rencontrés
 
@@ -190,8 +192,8 @@
 
 #### Planification des tâches pour le cours suivant
 
-- **Router** :
-- **Firewall** :
+- **Router** : Suppression des services inutiles
+- **Firewall** : Suppression des services inutiles sur les interfaces, web filter
 - **Switch** :
 
 ---
