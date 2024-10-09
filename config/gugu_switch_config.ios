@@ -108,14 +108,14 @@ switchport mode access
 switchport access vlan 10
 exit
 
-! Management VLAN:
+! Server VLAN:
 
 interface range GigabitEthernet 1/0/17-20
 switchport mode access
 switchport access vlan 50
 exit
 
-! Server VLAN:
+! Management VLAN:
 
 interface range GigabitEthernet 1/0/21-23
 switchport mode access
