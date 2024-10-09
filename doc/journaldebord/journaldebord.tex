@@ -1,0 +1,235 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[a4paper, total={6in, 9.5in}]{geometry}
+
+\title{Journal de bord}
+\author{Agence 7}
+
+\renewcommand \contentsname{Table des matières}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Informations générales}
+\begin{itemize}
+\item Nom du projet : Gestion et sécurisation d'une agence Cyber Sécurité
+\item Date de début : 24/09
+\item Responsable : Bruneau Mattias, VanGeebergen Augustin Agence 7
+\item Équipements utilisés : Cisco Router, Cisco Pare-feu, Cisco Switch Voir le fichier du listing matériel
+\item Objectif : Créer et sécuriser une infrastructure réseau
+\end{itemize}
+
+\newpage
+
+
+\section{[24/09]}
+
+\subsection{Documentation}
+\begin{itemize}
+\item Calcul d'ip + vlans Voir le plan d'adressage IP
+\item Création du schéma topologie de notre Agence 7 Voir le schéma Topologie Agence 7 et Voir le schéma Topologie Globale
+\item Etablissement d'un plan de nommage pour le matériel Voir le plan de nommage
+\item Listing du matériel (modèle fw, switch, router) Voir le fichier du listing matériel
+\end{itemize}
+
+\subsection{Router}
+\begin{itemize}
+\item Installation du Router sur le rack informatique
+\end{itemize}
+
+\subsection{Firewall}
+
+\begin{itemize}
+\item Installation du Firewall sur le rack informatique
+\end{itemize}
+
+\subsection{Switch}
+
+\begin{itemize}
+\item Installation du Switch sur le rack informatique
+\end{itemize}
+
+\subsection{Problèmes rencontrés}
+
+\begin{itemize}
+\item Reinitialisation de la configuration précédente
+\end{itemize} 
+
+\subsection{Planification des tâches pour le cours suivant}
+
+\begin{itemize}
+\item Router : Connexion au router
+\item Firewall : Connexion au FW
+\item Switch : Connexion au switch
+\end{itemize}
+
+\newpage
+
+\section{[25/09]}
+
+\subsection{Router}
+
+\begin{itemize}
+
+\item Première connexion au router
+\item Création admin + pwd
+\end{itemize}
+
+\subsection{Firewall}
+
+\begin{itemize}
+
+\item Première connexion au FW
+\item Création admin + pwd
+\end{itemize}
+
+
+\subsection{Switch}
+
+
+\begin{itemize}
+\item Première connexion au switch
+\item Création admin + pwd
+\end{itemize}
+
+
+\subsection{Problèmes rencontrés}
+\begin{itemize}
+\item Problème d'affichage dans le terminal.
+\end{itemize} 
+
+\subsection{Planification des tâches pour le cours suivant}
+
+
+\begin{itemize}
+\item Router : Gestion des interfaces. (IP Statiques WAN1, FW)
+\item Firewall : Création des interfaces pour les VLANs (sous-interfaces avec assignations des ranges IP en DHCP)
+\item Switch : Gestion des VLANs + assignations des ports
+\end{itemize} 
+
+
+
+\newpage
+
+\section{[02/10]}
+
+
+
+\subsection{Router}
+
+\begin{itemize}
+\item Gestion des interfaces (IP Statiques WAN1, FW)
+\item Assignation WEB ui
+\end{itemize} 
+
+
+\subsection{Firewall}
+
+\begin{itemize}
+\item Création des interfaces pour les VLANs (sous-interfaces avec assignations des ranges IP en DHCP)
+\end{itemize} 
+\subsection{Switch}
+
+\begin{itemize}
+\item Gestion des VLANs + assignations des ports
+\end{itemize} 
+\subsection{Problèmes rencontrés}
+\begin{itemize}
+\item Pas de problèmes majeurs rencontrés. (Temps de réponse FW)
+\end{itemize} 
+\subsection{Planification des tâches pour le cours suivant}
+\begin{itemize}
+\item Router : Gestion SSH + Banner motd + Timeout après 3 essais et après 5 min d'inactivité
+\item Firewall : Création interface DMZ + Création interface WAN2 + assignation des adresses IP statiques + Banner motd + Timeout après 3 essais et après 5 min d'inactivité
+\item Switch : Banner motd + SSH + Timeout après 3 essais et après 5 min d'inactivité
+\end{itemize} 
+\newpage
+\section{[03/10]}
+
+\subsection{Router}
+
+
+\begin{itemize}
+
+\item SSH + banner + timeout
+\end{itemize} 
+
+\subsection{Firewall}
+
+
+\begin{itemize}
+
+\item DMZ + WAN 2 + IP statiques DMZ et WAN 2 + banner + timeout
+\end{itemize} 
+
+\subsection{Switch}
+
+\begin{itemize}
+
+\item SSH + banner + timeout
+\end{itemize} 
+
+\subsection{Problèmes rencontrés}
+\begin{itemize}
+
+\item Problème SSH sur le switch étant donné mauvaise version IOS
+
+\end{itemize} 
+
+\subsection{Planification des tâches pour le cours suivant}
+\begin{itemize}
+
+
+\item Router : Ajout de sécurité lié au ssh (TO, Logging events, retries)
+\item Firewall : règles fw (création de policies) + port sécurity + dhcp snooping
+\item Switch : Ajout de sécurité lié au ssh (TO, Logging events, retries)
+\end{itemize} 
+
+\newpage
+\section{[07/10]}
+
+\subsection{Router}
+
+\begin{itemize}
+
+\item Vérification device (SSH, sécurité) + ajout des sécurités SSH
+\end{itemize} 
+
+\subsection{Firewall}
+
+\begin{itemize}
+
+\item Création des règles du FW (policies), port security, dhcp snooping
+
+\end{itemize} 
+\subsection{Switch}
+
+\begin{itemize}
+
+\item Vérification device (SSH, sécurité) + ajout des sécurités SSH
+\end{itemize} 
+\subsection{Problèmes rencontrés}
+\begin{itemize}
+
+\item /
+\end{itemize} 
+\subsection{Planification des tâches pour le cours suivant}
+\begin{itemize}
+
+\item Router : Vérification apr le professeur de nos configurations
+\item Firewall : Vérification apr le professeur de nos configurations
+\item Switch : Vérification apr le professeur de nos configurations
+
+
+\end{itemize} 
+
+
+\end{document}
