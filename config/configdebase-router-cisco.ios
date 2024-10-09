@@ -1,0 +1,81 @@
+enable
+configure terminal
+
+! Set the hostname
+hostname AG_7_RT_1_PD_P
+
+! Enable password encryption service
+service password-encryption
+
+! Set the enable secret password
+enable secret @0Test123*
+
+! Configure the console password
+line console 0
+ password @CiscoTest123*
+ login
+
+! Configure the VTY lines password
+line vty 0 4
+ password @CiscoTest123*
+ login
+
+! Create an admin user
+username admin privilege 15 secret @0Test123*
+
+! Set the IP address for the GigabitEthernet0/0 interface
+interface GigabitEthernet0/0/0
+ ip address 192.168.0.150 255.255.255.252
+ negotiation auto
+ no shutdown
+
+! Set the IP address for the GigabitEthernet0/1 interface
+interface GigabitEthernet0/0/1
+ ip address 172.30.200.1 255.255.255.252
+ negotiation auto
+ no shutdown
+
+! Set the IP address for the GigabitEthernet0/2 interface
+interface GigabitEthernet0/0/2
+ no ip address
+ shutdown
+
+! Set the IP address for the GigabitEthernet0/3 interface
+interface GigabitEthernet0/0/3
+ no ip address
+ shutdown
+
+! Configure a default route
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0
+
+! Disable unused services
+no ip http server
+no ip http secure-server
+
+! Configure a security banner
+banner motd ^C
+Unauthorized access to this device is prohibited. All activities will be monitored and reported.
+^C
+! Configure SSH
+ip domain-name agencesept.com
+crypto key generate rsa modulus 2048
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+
+! Implement basic ACL to restrict access
+access-list 10 permit 172.30.30.1  255.255.255.248
+access-list 10 deny any
+
+! Configure the VTY lines
+line vty 0 4
+ access-class 10 in
+ transport input ssh
+ login local
+
+! Configure login block
+login block-for 120 attempts 3 within 60
+
+ ! Save the configuration
+end
+write memory

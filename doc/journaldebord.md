@@ -158,8 +158,11 @@
 
 #### Planification des tâches pour le cours suivant
 
-- **Router** :
-- **Firewall** :
-- **Switch** :
+- - - **Effectuer les MAJ suite aux indications du professeur**
+- - - **MAJ du kanban board sur teams pour avoir une meilleure vue d'ensemble des tâches à réaliser**
+
+- **Router** : création script de la configuration de base
+- **Firewall** : règles de pare feu (web filter)
+- **Switch** : supression des interfaces des vlans1
 
 ---
