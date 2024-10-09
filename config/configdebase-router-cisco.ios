@@ -48,9 +48,15 @@ interface GigabitEthernet0/0/3
 ! Configure a default route
 ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0
 
-! Disable unused services
-no ip http server
-no ip http secure-server
+! Enable HTTP and HTTPS servers
+ip http server
+ip http secure-server
+ip http authentication local
+
+access-list 1 permit 172.30.30.1  255.255.255.248
+access-list 1 deny any
+
+ip http access-class 1
 
 ! Configure a security banner
 banner motd ^C
