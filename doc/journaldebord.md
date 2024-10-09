@@ -173,6 +173,7 @@
 
   - Tâches :
     - création script de la configuration de base
+    - ajout d'une police de pwd
 
 - **Firewall**
 
