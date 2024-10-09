@@ -25,25 +25,44 @@ ip address 172.30.50.1 255.255.255.0
 no shutdown
 exit
 
+! Create VLAN 100 if it doesn't already exist
+vlan 100
+name Unassigned
+exit
+
+! Select the interfaces and move them to VLAN 100, then shut them down
+interface range GigabitEthernet1/0/25 - 28
+switchport access vlan 100
+shutdown
+exit
+
+! Remove VLAN 100 from the VLAN database (deactivate VLAN 100)
+no vlan 100
+
+! Save the configuration
+end
+write memory
+
+
 ! Users VLAN (Access Mode):
 
-interface range GigabitEthernet 1/0/1-10
+interface range GigabitEthernet 1/0/1-16
 switchport mode access
 switchport access vlan 10
 exit
 
 ! Management VLAN:
 
-interface range GigabitEthernet 1/0/11-20
+interface range GigabitEthernet 1/0/17-20
 switchport mode access
-switchport access vlan 30
+switchport access vlan 50
 exit
 
 ! Server VLAN:
 
 interface range GigabitEthernet 1/0/21-23
 switchport mode access
-switchport access vlan 50
+switchport access vlan 30
 exit
 
 ! Trunk Port Configuration (Assuming the trunk is on port GigabitEthernet0/24 for communication between the switch and Fortinet):
@@ -53,3 +72,6 @@ switchport mode trunk
 switchport trunk allowed vlan 10,30,50
 no shutdown
 exit
+
+end
+write memory
