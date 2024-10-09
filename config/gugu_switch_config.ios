@@ -1,6 +1,63 @@
 enable
 configure terminal
 
+! DEFAULT CONFIGURATION
+! Set the hostname
+hostname AG_7_SW_1_PD_P
+
+! Enable password encryption service
+service password-encryption
+
+! Set the enable secret password
+enable secret @0Test123*
+
+! Configure the console password
+line console 0
+ password @CiscoTest123*
+ login
+
+! Configure the VTY lines password
+line vty 0 4
+ password @CiscoTest123*
+ login
+
+! Create an admin user
+username admin privilege 15 secret @0Test123*
+
+! Enable HTTP and HTTPS servers
+ip http server
+ip http secure-server
+ip http authentication local
+
+access-list 1 permit 172.30.30.1  255.255.255.248
+access-list 1 deny any
+
+ip http access-class 1
+
+! Configure a security banner
+banner motd ^C
+Unauthorized access to this device is prohibited. All activities will be monitored and reported.
+^C
+! Configure SSH
+ip domain-name agencesept.com
+crypto key generate rsa modulus 2048
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+
+! Implement basic ACL to restrict access
+access-list 10 permit 172.30.30.1  255.255.255.248
+access-list 10 deny any
+
+! Configure the VTY lines
+line vty 0 4
+ access-class 10 in
+ transport input ssh
+ login local
+
+! Configure login block
+login block-for 120 attempts 3 within 60
+
 vlan 10
 name Users
 exit

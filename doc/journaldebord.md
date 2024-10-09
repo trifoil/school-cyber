@@ -166,3 +166,31 @@
 - **Switch** : supression des interfaces des vlans1
 
 ---
+
+### [9/10]
+
+- **Router**
+
+  - Tâches :
+    - création script de la configuration de base
+
+- **Firewall**
+
+  - ## Tâches :
+
+- **Switch**
+  - Tâches :
+    - création script de la configuration de base
+    - Suppression des interfaces sur la VLAN 1
+
+#### Problèmes rencontrés
+
+- /
+
+#### Planification des tâches pour le cours suivant
+
+- **Router** :
+- **Firewall** :
+- **Switch** :
+
+---
