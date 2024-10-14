@@ -193,7 +193,32 @@
 #### Planification des tâches pour le cours suivant
 
 - **Router** : Suppression des services inutiles
-- **Firewall** : Suppression des services inutiles sur les interfaces, web filter
+- **Firewall** : Suppression des services inutiles sur les interfaces + rules fw + logs + portail captif
+- **Switch** : Mise en place stp
+
+---
+
+### [14/10]
+
+- **Router**
+
+  - ## Tâches :
+
+- **Firewall**
+
+  - ## Tâches:
+
+- **Switch**
+  - ## Tâches :
+
+#### Problèmes rencontrés
+
+- /
+
+#### Planification des tâches pour le cours suivant
+
+- **Router** :
+- **Firewall** :
 - **Switch** :
 
 ---
