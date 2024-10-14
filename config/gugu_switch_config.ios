@@ -130,5 +130,59 @@ switchport trunk allowed vlan 10,30,50
 no shutdown
 exit
 
+
+! DHCP snooping : activate service and list trusted ports (ici le trunk, GigabitEthernet 1/0/24)
+
+conf t
+
+ip dhcp snooping
+
+ip dhcp snooping vlan 10
+ip dhcp snooping vlan 30
+ip dhcp snooping vlan 50
+
+interface GigabitEthernet 1/0/24
+ip dhcp snooping trust
+exit
+
+! DHCP snooping : prevent starvation attacks
+
+interface range GigabitEthernet 1/0/1-23
+ip dhcp snooping limit rate 10
+exit
+
+! Dynamic ARP Inspection : untrusted ports are all on vlan 10 (clients), there is no need to configure the others, so it will be commented.
+
+conf terminal
+
+ip arp inspection vlan 10
+
+exit
+
+! Dynamic ARP Inspection : prevent flooding attacks
+
+conf terminal
+
+interface range GigabitEthernet 1/0/1-16
+ip arp inspection limit rate 15
+
+exit
+
+
+! To authorize ports: 
+! Switch(config)# interface GigabitEthernet1/0/x
+! Switch(config-if)# ip arp inspection trust
+! To explicitly specify untrusted ports:
+! Switch(config)# interface GigabitEthernet1/0/2
+! Switch(config-if)# no ip arp inspection trust
+
+
+
 end
+
+! DHCP snooping : show snooping conf
+
+show ip dhcp snooping
+show ip arp inspection
+
 write memory
