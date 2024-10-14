@@ -207,6 +207,10 @@
 - **Firewall**
 
   - ## Tâches:
+    - Désactivation des MAJ automatiques
+    - Suppression des services inutiles sur les VLAN
+    - Ajout des logs
+    - Règles AntiVirus
 
 - **Switch**
   - ## Tâches :
