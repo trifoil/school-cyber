@@ -1,0 +1,79 @@
+! Ceci est un exemple de config, il peut comprendre des erreurs et il DOIT être adapté à votre infra UwU 
+! Sans oublier de bine tout comprends Mandoux pose des questions quand vous le faite valider ! 
+! une donnée [] veux dire qu'il faut l'y insérer sans les [] 
+
+! config de base router
+enable 
+config t 
+hostname [nom]
+enable secret [niveau][mdp]
+service password-encryption
+security passwords min-length 15
+! login block-for 600 attempts 5 within 120
+banner motd # Unauthorised acces stricly prohibited #
+no ip domain-lookup
+login delay 2
+
+! line consol 0
+conf t
+line consol 0 
+logging synchronous
+password [mdp]
+login 
+no exec-timeout 5
+
+! line vty 0 15
+conf t
+line vty 0 15 
+logging synchronous
+password [mdp]
+login 
+no exec-timeout 5
+access-class ACL-SSH in
+end
+
+! config acl ssh
+conf t
+ip access-list standard ACL-SSH
+permit 172.20.30.250 0.0.0.254
+
+    ip access-list standard ACL-base
+    deny 10.0.0.0 0.255.255.255
+    deny 172.16.0.0 0.15.255.255
+    deny 192.168.0.0 0.0.255.255
+    deny 127.0.0.1 0.0.0.0
+    deny 224.0.0.0 15.255.255.255
+    permit any any
+
+! config ssh router
+conf t
+ip domain name [nom]
+crypto key generate rsa general-keys modulus 2048
+username [nom] password [mdp]
+ip ssh version 2
+line vty 0 15
+transport input ssh
+login local
+end
+
+! config interfaces ip 
+conf t
+interface GigabitEthernet0/0/0
+ip address 192.168.0.14 255.255.255.252
+ip access-group ACL-base in
+no shutdown
+interface GigabitEthernet0/0/1
+ip address 172.20.200.1 255.255.255.252
+no shutdown
+end
+
+! config ip route
+conf t
+ip route 0.0.0.0 0.0.0.0 192.168.0.13
+end
+
+cop run st
+
+
+
+
