@@ -1,26 +1,25 @@
 ! basic configuration
 
 enable 
-conf terminal
+    conf t
+        ! Set the hostname
+        hostname WN_1_RT_5_PD_P
+        ! Enable password encryption service
+        service password-encryption
+        ! Set the enable secret password
+        enable secret @0Test123*
+        ! Configure the console password
+    end
 
-! Set the hostname
-hostname WN_1_RT_5_PD_P
-
-! Enable password encryption service
-service password-encryption
-
-! Set the enable secret password
-enable secret @0Test123*
-
-! Configure the console password
-line console 0
- password @CiscoTest123*
- login
-
- ! Configure the VTY lines password
-line vty 0 4
- password @CiscoTest123*
- login
+    line console 0
+        logging synchronous
+        password @CiscoTest123*
+        login
+        ! Configure the VTY lines password
+        line vty 0 4
+        password @CiscoTest123*
+        login
+    end
 
  ! Create an admin user
 username admin privilege 15 secret @0Test123*
@@ -31,6 +30,10 @@ Unauthorized access to this device is prohibited. All activities will be monitor
 ^C
 
 
+! ospf
+
+conf terminal
+    router ospf 10
 
 
-
+! 

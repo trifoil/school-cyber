@@ -1,0 +1,135 @@
+```configure terminal 
+
+!--- Informations appareil --- ok 
+hostname WN_1_RT_2_PD_P
+banner motd # Welcome to WN_1_RT_2_PD_P ! AUTHORIZED ACCESS ONLY ! #
+clock timezone UTC 2
+lldp run
+
+
+!--- Domaine ---
+no ip domain lookup
+ip domain name citron.lan
+
+
+!--- Securité ---
+security password min-length 15
+login block-for 120 attempts 5 within 60
+login delay 2
+enable secret 0 5ozTJi54m5Utz5p
+username Citron-Admin-RT-WAN secret 0 F7xb7PU7sug3i6p
+service password-encryption
+
+
+!--- Lignes ---
+line console 0
+	logging synchronous 
+	login local
+    exec-timeout 8
+    exit
+
+ip access-list standard SSH_ACL
+    permit host 192.168.0.10
+    exit
+
+line vty 0 15
+    transport input ssh
+    access-class SSH_ACL in
+    logging synchronous
+    login local
+    exec-timeout 8
+    exit
+
+
+!--- ACL pour le NAT ---
+access-list 1 permit 192.168.0.0 0.0.255.255
+
+!--- PAT ---
+ip nat inside source list 1 interface g0/0/1 overload
+
+
+!--- Routage  ---
+ip route 0.0.0.0 0.0.0.0 10.10.213.252
+router ospf 10
+    router-id 2.2.2.2
+    default-information originate always
+    passive-interface g0/0/1
+    ! area 1 range 192.168.0.0 0.0.0.63 ! ????
+    exit
+
+
+!--- Clefs pour OSPF ---
+key chain ospf-hmac-key1
+   key 1
+   cryptographic-algorithm hmac-sha-256
+   key-string 67PdSq5Krw2Zcu6
+   exit 
+
+key chain ospf-hmac-key2
+   key 2
+   cryptographic-algorithm hmac-sha-256
+   key-string 8uUA646r8ZgRq8i
+   exit
+
+key chain ospf-hmac-key3
+   key 3
+   cryptographic-algorithm hmac-sha-256
+   key-string g67ynLS4z2KP4oo
+   exit
+exit
+
+
+!--- Interface ---
+interface g0/0/1
+    description "relie au FAI (uplink Internet)"
+    ip address 10.10.213.201 255.255.255.0
+    ip ospf 10 area 0
+    ip nat outside
+    no shutdown
+    exit
+
+interface g0/0/0
+    description "relie au local 2.16"
+    ip address 192.168.0.65 255.255.255.252
+    ip ospf 10 area 0
+    ip ospf authentication key-chain ospf-hmac-key2
+    
+    ! Pour info :
+    !ip ospf priority ######
+    !ip ospf hello-interval 20
+    !ip ospf dead-interval 80
+    ! ip ospf network point-to-point
+    ip nat inside
+    no shutdown
+    exit
+
+! show interfaces s0/1/1 ! modèle de série
+
+interface s0/1/1
+    description "relie au WN_RT_1_PD_P"
+    ip address 192.168.0.18 255.255.255.252
+    ip ospf 10 area 1
+    ip ospf authentication key-chain ospf-hmac-key1
+    ip ospf network point-to-point
+    clock rate 8000000
+    bandwidth 8000
+    ip nat inside
+    no shutdown
+    exit
+
+interface s0/1/0
+    description "relie au WN_RT_3_PD_P"
+    ip address 192.168.0.25 255.255.255.252
+    ip ospf 10 area 1
+    ip ospf authentication key-chain ospf-hmac-key3
+    ip ospf network point-to-point
+    ! clock rate 8000000
+    bandwidth 8000
+    ip nat inside
+    no shutdown
+    exit
+
+
+!--- Fin | Sauvegarde ---
+exit
+copy running-config startup-config```
