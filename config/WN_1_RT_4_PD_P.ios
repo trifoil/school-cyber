@@ -20,7 +20,6 @@ key chain OSPF-Link-4-6
 
 ! conf interfaces
 
-
         interface f0/0
             no shutdown
             exit
@@ -30,10 +29,26 @@ key chain OSPF-Link-4-6
             exit
 
         interface s0/1/0
+            description "OSPF -> WN_1_RT_6_PD_P"
+            ip address 192.168.0.153 255.255.255.252
+            ip ospf authentication key-chain OSPF-Link-4-6
+            ip ospf network point-to-point
+            clock rate 8000000
+            bandwidth 8000
+            ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
         interface s0/1/1
+            description "OSPF -> WN_1_RT_5_PD_P"
+            ip address 192.168.0.149 255.255.255.252
+            ip ospf authentication key-chain OSPF-Link-5-4
+            ip ospf network point-to-point
+            clock rate 8000000
+            bandwidth 8000
+            ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
