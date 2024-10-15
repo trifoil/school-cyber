@@ -1,0 +1,8 @@
+! basic configuration
+
+enable 
+
+conf terminal
+
+hostname WN_1_RT_5_PD_P
+
