@@ -1,8 +1,36 @@
 ! basic configuration
 
 enable 
-
 conf terminal
 
+! Set the hostname
 hostname WN_1_RT_5_PD_P
+
+! Enable password encryption service
+service password-encryption
+
+! Set the enable secret password
+enable secret @0Test123*
+
+! Configure the console password
+line console 0
+ password @CiscoTest123*
+ login
+
+ ! Configure the VTY lines password
+line vty 0 4
+ password @CiscoTest123*
+ login
+
+ ! Create an admin user
+username admin privilege 15 secret @0Test123*
+
+! Configure a security banner
+banner motd ^C
+Unauthorized access to this device is prohibited. All activities will be monitored and reported.
+^C
+
+
+
+
 
