@@ -1,0 +1,42 @@
+! CISCO 4221 
+
+enable
+    conf t
+        hostname WN_1_RT_5_PD_P
+
+! conf keys
+
+key chain OSPF-Link-5-4
+    key 1 
+    cryptographic-algorithm hmac-sha-256
+    key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
+    exit
+
+key chain OSPF-Link-4-6
+    key 1
+    cryptographic-algorithm hmac-sha-256
+    key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
+    exit
+
+! conf interfaces
+
+
+        interface f0/0
+            no shutdown
+            exit
+
+        interface f0/1
+            no shutdown
+            exit
+
+        interface s0/1/0
+            no shutdown
+            exit
+
+        interface s0/1/1
+            no shutdown
+            exit
+
+    end
+
+write memory

@@ -1,39 +1,70 @@
-! basic configuration
+! CISCO 4221 
 
-enable 
+enable
     conf t
-        ! Set the hostname
         hostname WN_1_RT_5_PD_P
-        ! Enable password encryption service
-        service password-encryption
-        ! Set the enable secret password
-        enable secret @0Test123*
-        ! Configure the console password
+
+! conf keys
+
+key chain OSPF-Link-213
+    key 1
+    cryptographic-algorithm hmac-sha-256
+    key-string s58ecse4c6sdf46bfik43436456s846a81a1z546zez4yk
+    exit
+
+key chain OSPF-Link-5-4
+    key 1 
+    cryptographic-algorithm hmac-sha-256
+    key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
+    exit
+
+key chain OSPF-Link-5-6
+    key 1
+    cryptographic-algorithm hmac-sha-256
+    key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
+    exit
+
+! conf interfaces
+
+        interface f0/0
+            description "Area 0 -> 2.13"
+            ip address 192.168.0.66 255.255.255.252
+            ip ospf 10 area 0
+            ip ospf authentication key-chain OSPF-Link-213
+            ip nat inside
+            no shutdown
+            exit
+
+        interface f0/1
+            description "Site 2"
+            ip nat inside
+            no shutdown
+            exit
+
+        interface s0/1/0
+            description "OSPF -> WN_1_RT_4_PD_P"
+            ip address 192.168.0.150 255.255.255.252
+            ip ospf authentication key-chain OSPF-Link-5-4
+            ip ospf network point-to-point
+            clock rate 8000000
+            bandwidth 8000
+            ip ospf 10 area 2
+            ip nat inside
+            no shutdown
+            exit
+
+        interface s0/1/1
+            description "OSPF -> WN_1_RT_6_PD_P"
+            ip address 192.168.0.157 255.255.255.252
+            ip ospf authentication key-chain OSPF-Link-5-6
+            ip ospf network point-to-point
+            clock rate 8000000
+            bandwidth 8000
+            ip ospf 10 area 2
+            ip nat inside
+            no shutdown
+            exit
+
     end
 
-    line console 0
-        logging synchronous
-        password @CiscoTest123*
-        login
-        ! Configure the VTY lines password
-        line vty 0 4
-        password @CiscoTest123*
-        login
-    end
-
- ! Create an admin user
-username admin privilege 15 secret @0Test123*
-
-! Configure a security banner
-banner motd ^C
-Unauthorized access to this device is prohibited. All activities will be monitored and reported.
-^C
-
-
-! ospf
-
-conf terminal
-    router ospf 10
-
-
-! 
+write memory
