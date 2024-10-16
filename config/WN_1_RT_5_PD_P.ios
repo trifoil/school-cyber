@@ -8,25 +8,30 @@ enable
         clock timezone UTC 2
         lldp run
 
+! domain 
+
+        no ip domain lookup
+        ip domain name citron.lan
+
 ! conf keys
 
         key chain OSPF-Link-213
             key 1
             cryptographic-algorithm hmac-sha-256
             key-string 8uUA646r8ZgRq8i
-            exit
+        exit
 
         key chain OSPF-Link-5-4
             key 1 
             cryptographic-algorithm hmac-sha-256
             key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
-            exit
+        exit
 
         key chain OSPF-Link-5-6
             key 1
             cryptographic-algorithm hmac-sha-256
             key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
-            exit
+        exit
 
 ! conf routing
 

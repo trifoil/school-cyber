@@ -8,6 +8,11 @@ enable
         clock timezone UTC 2
         lldp run
 
+! domain 
+
+        no ip domain lookup
+        ip domain name citron.lan
+
 ! conf keys
 
         key chain OSPF-Link-5-4
