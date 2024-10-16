@@ -1,22 +1,23 @@
 ! CISCO 4221 
+! base conf 
 
 enable
     conf t
-        hostname WN_1_RT_5_PD_P
+        hostname WN_1_RT_6_PD_P
 
 ! conf keys
 
-key chain OSPF-Link-4-6
-    key 1
-    cryptographic-algorithm hmac-sha-256
-    key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
-    exit
+        key chain OSPF-Link-4-6
+            key 1
+            cryptographic-algorithm hmac-sha-256
+            key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
+            exit
 
-key chain OSPF-Link-5-6
-    key 1
-    cryptographic-algorithm hmac-sha-256
-    key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
-    exit
+        key chain OSPF-Link-5-6
+            key 1
+            cryptographic-algorithm hmac-sha-256
+            key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
+            exit
 
 ! conf routing
 
@@ -31,6 +32,7 @@ key chain OSPF-Link-5-6
             description "-> AG6"
             ip address 192.168.0.133 255.255.255.252
             ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
@@ -38,6 +40,7 @@ key chain OSPF-Link-5-6
             description "-> AG4"
             ip address 192.168.0.145 255.255.255.252
             ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
@@ -49,7 +52,6 @@ key chain OSPF-Link-5-6
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
-            ip nat inside
             no shutdown
             exit
 
@@ -61,7 +63,6 @@ key chain OSPF-Link-5-6
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
-            ip nat inside
             no shutdown
             exit
 

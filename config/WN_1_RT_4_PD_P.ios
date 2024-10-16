@@ -3,9 +3,8 @@
 
 enable
     conf t
-        hostname WN_1_RT_5_PD_P
+        hostname WN_1_RT_4_PD_P
     
-
 ! conf keys
 
         key chain OSPF-Link-5-4
@@ -33,6 +32,7 @@ enable
             description "-> AG7"
             ip address 192.168.0.137 255.255.255.252
             ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
@@ -40,6 +40,7 @@ enable
             description "-> AG5"
             ip address 192.168.0.141 255.255.255.252
             ip ospf 10 area 2
+            ip nat inside
             no shutdown
             exit
 
@@ -51,7 +52,6 @@ enable
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
-            ip nat inside
             no shutdown
             exit
 
@@ -63,7 +63,6 @@ enable
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
-            ip nat inside
             no shutdown
             exit
 
