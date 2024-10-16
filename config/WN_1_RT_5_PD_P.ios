@@ -4,6 +4,9 @@
 enable
     conf t
         hostname WN_1_RT_5_PD_P
+        banner motd # Unauthorized access prohibited! #
+        clock timezone UTC 2
+        lldp run
 
 ! conf keys
 
@@ -28,8 +31,9 @@ enable
 ! conf routing
 
         router ospf 10
-        router-id 5.5.5.5
-        passive-interface f0/1
+            router-id 5.5.5.5
+            passive-interface f0/1
+        exit
 
 ! conf interfaces
 
@@ -40,14 +44,14 @@ enable
             ip ospf authentication key-chain OSPF-Link-213
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface f0/1
             description "-> Site 2"
             ip address 192.168.0.129 255.255.255.252
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface s0/1/0
             description "OSPF -> WN_1_RT_4_PD_P"
@@ -58,7 +62,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
         interface s0/1/1
             description "OSPF -> WN_1_RT_6_PD_P"
@@ -69,7 +73,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
     end
 

@@ -4,27 +4,31 @@
 enable
     conf t
         hostname WN_1_RT_4_PD_P
-    
+        banner motd # Unauthorized access prohibited! #
+        clock timezone UTC 2
+        lldp run
+
 ! conf keys
 
         key chain OSPF-Link-5-4
             key 1 
             cryptographic-algorithm hmac-sha-256
             key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
-            exit
+        exit
 
         key chain OSPF-Link-4-6
             key 1
             cryptographic-algorithm hmac-sha-256
             key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
-            exit
+        exit
 
 ! conf routing
 
         router ospf 10
-        router-id 4.4.4.4
-        passive-interface f0/0
-        passive-interface f0/1
+            router-id 4.4.4.4
+            passive-interface f0/0
+            passive-interface f0/1
+        exit
 
 ! conf interfaces
 
@@ -34,7 +38,7 @@ enable
             ip ospf 10 area 2
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface f0/1
             description "-> AG5"
@@ -42,7 +46,7 @@ enable
             ip ospf 10 area 2
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface s0/1/0
             description "OSPF -> WN_1_RT_6_PD_P"
@@ -53,7 +57,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
         interface s0/1/1
             description "OSPF -> WN_1_RT_5_PD_P"
@@ -64,7 +68,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
     end
 
