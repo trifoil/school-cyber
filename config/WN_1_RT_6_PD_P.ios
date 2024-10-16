@@ -4,6 +4,9 @@
 enable
     conf t
         hostname WN_1_RT_6_PD_P
+        banner motd # Unauthorized access prohibited! #
+        clock timezone UTC 2
+
 
 ! conf keys
 
