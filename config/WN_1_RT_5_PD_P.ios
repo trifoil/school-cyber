@@ -6,23 +6,30 @@ enable
 
 ! conf keys
 
-key chain OSPF-Link-213
-    key 1
-    cryptographic-algorithm hmac-sha-256
-    key-string s58ecse4c6sdf46bfik43436456s846a81a1z546zez4yk
-    exit
+        key chain OSPF-Link-213
+            key 1
+            cryptographic-algorithm hmac-sha-256
+            key-string s58ecse4c6sdf46bfik43436456s846a81a1z546zez4yk
+            exit
 
-key chain OSPF-Link-5-4
-    key 1 
-    cryptographic-algorithm hmac-sha-256
-    key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
-    exit
+        key chain OSPF-Link-5-4
+            key 1 
+            cryptographic-algorithm hmac-sha-256
+            key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
+            exit
 
-key chain OSPF-Link-5-6
-    key 1
-    cryptographic-algorithm hmac-sha-256
-    key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
-    exit
+        key chain OSPF-Link-5-6
+            key 1
+            cryptographic-algorithm hmac-sha-256
+            key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
+            exit
+
+! conf routing
+
+        router ospf 10
+        router-id 5.5.5.5
+        passive-interface f0/0
+        passive-interface f0/1
 
 ! conf interfaces
 
@@ -36,7 +43,7 @@ key chain OSPF-Link-5-6
             exit
 
         interface f0/1
-            description "Site 2"
+            description "-> Site 2"
             ip nat inside
             no shutdown
             exit

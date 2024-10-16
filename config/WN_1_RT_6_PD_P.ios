@@ -18,13 +18,26 @@ key chain OSPF-Link-5-6
     key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
     exit
 
+! conf routing
+
+        router ospf 10
+        router-id 6.6.6.6
+        passive-interface f0/0
+        passive-interface f0/1
+
 ! conf interfaces
 
         interface f0/0
+            description "-> AG6"
+            ip address 192.168.0.133 255.255.255.252
+            ip ospf 10 area 2
             no shutdown
             exit
 
         interface f0/1
+            description "-> AG4"
+            ip address 192.168.0.145 255.255.255.252
+            ip ospf 10 area 2
             no shutdown
             exit
 
