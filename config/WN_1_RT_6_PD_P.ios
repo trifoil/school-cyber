@@ -6,7 +6,32 @@ enable
         hostname WN_1_RT_6_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
+        lldp run
+        security password min-length 8
+        service password-encryption
+        enable secret @0Test123*
+        username Citron-Admin-RT-WAN secret @0Test123*
+        login block-for 120 attempts 5 within 60
+        login delay 2
+        line console 0
+            logging synchronous
+            exec-timeout 15 0
+        exit
+        ip access-list standard SSH_ACL
+            permit host 192.168.0.138
+        exit
+        line vty 0 15
+            transport input ssh
+            access-class SSH_ACL in
+            login local
+            logging synchronous
+        exit
+        crypto key generate rsa modulus 2048
 
+! domain 
+
+        no ip domain lookup
+        ip domain name citron.lan
 
 ! conf keys
 
@@ -14,20 +39,21 @@ enable
             key 1
             cryptographic-algorithm hmac-sha-256
             key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
-            exit
+        exit
 
         key chain OSPF-Link-5-6
             key 1
             cryptographic-algorithm hmac-sha-256
             key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
-            exit
+        exit
 
 ! conf routing
 
         router ospf 10
-        router-id 6.6.6.6
-        passive-interface f0/0
-        passive-interface f0/1
+            router-id 6.6.6.6
+            passive-interface f0/0
+            passive-interface f0/1
+        exit
 
 ! conf interfaces
 
@@ -37,7 +63,7 @@ enable
             ip ospf 10 area 2
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface f0/1
             description "-> AG4"
@@ -45,7 +71,7 @@ enable
             ip ospf 10 area 2
             ip nat inside
             no shutdown
-            exit
+        exit
 
         interface s0/1/0
             description "OSPF -> WN_1_RT_5_PD_P"
@@ -56,7 +82,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
         interface s0/1/1
             description "OSPF -> WN_1_RT_4_PD_P"
@@ -67,7 +93,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-            exit
+        exit
 
     end
 
