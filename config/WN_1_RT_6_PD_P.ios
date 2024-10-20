@@ -6,15 +6,12 @@ enable
         hostname WN_1_RT_6_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
-        lldp run  ! unrecognized
         
 ! domain 
 
         no ip domain lookup
         ip domain name citron.lan
         end
-
-    
 
 ! conf routing
 enable
@@ -66,9 +63,7 @@ enable
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
-        end
-
-
-    
+        exit
+    end
 
 write memory

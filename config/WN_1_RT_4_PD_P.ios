@@ -6,37 +6,25 @@ enable
         hostname WN_1_RT_4_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
-        lldp run
 
 ! domain 
 
         no ip domain lookup
         ip domain name citron.lan
-
-! conf keys
-
-        key chain OSPF-Link-5-4
-            key 1 
-            cryptographic-algorithm hmac-sha-256
-            key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
-        exit
-
-        key chain OSPF-Link-4-6
-            key 1
-            cryptographic-algorithm hmac-sha-256
-            key-string s4e8fsevt4es9v4et4etet4ese4v68sve4r841se84848e
-        exit
+        end
 
 ! conf routing
-
+enable
+    conf t
         router ospf 10
             router-id 4.4.4.4
             passive-interface f0/0
             passive-interface f0/1
-        exit
+        end
 
 ! conf interfaces
-
+enable
+    conf t
         interface f0/0
             description "-> AG7"
             ip address 192.168.0.137 255.255.255.252
@@ -56,7 +44,8 @@ enable
         interface s0/1/0
             description "OSPF -> WN_1_RT_6_PD_P"
             ip address 192.168.0.153 255.255.255.252
-            ip ospf authentication key-chain OSPF-Link-4-6
+            ip ospf authentication message-digest
+            ip ospf message-digest-key 1 md5 Test123*
             ip ospf network point-to-point
             clock rate 8000000
             bandwidth 8000
@@ -67,14 +56,14 @@ enable
         interface s0/1/1
             description "OSPF -> WN_1_RT_5_PD_P"
             ip address 192.168.0.149 255.255.255.252
-            ip ospf authentication key-chain OSPF-Link-5-4
+            ip ospf authentication message-digest
+            ip ospf message-digest-key 1 md5 Test123*
             ip ospf network point-to-point
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
         exit
-
     end
 
 write memory

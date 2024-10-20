@@ -6,47 +6,30 @@ enable
         hostname WN_1_RT_5_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
-        lldp run
 
 ! domain 
 
         no ip domain lookup
         ip domain name citron.lan
-
-! conf keys
-
-        key chain OSPF-Link-213
-            key 1
-            cryptographic-algorithm hmac-sha-256
-            key-string 8uUA646r8ZgRq8i
-        exit
-
-        key chain OSPF-Link-5-4
-            key 1 
-            cryptographic-algorithm hmac-sha-256
-            key-string s3w6v8418r1y68v1sdryv13swd3r8tv7q86s4rt86q4vze
-        exit
-
-        key chain OSPF-Link-5-6
-            key 1
-            cryptographic-algorithm hmac-sha-256
-            key-string 4518dxvt8f71vg843vt864qe368rt848d4rqt86qed4rtq
-        exit
+        end
 
 ! conf routing
-
+enable
+    conf t
         router ospf 10
             router-id 5.5.5.5
             passive-interface f0/1
-        exit
+        end
 
 ! conf interfaces
-
+enable
+    conf t
         interface f0/0
             description "Area 0 -> 2.13"
             ip address 192.168.0.66 255.255.255.252
             ip ospf 10 area 0
-            ip ospf authentication key-chain OSPF-Link-213
+            ip ospf authentication message-digest
+            ip ospf message-digest-key 1 md5 8uUA646r8ZgRq8i
             ip nat inside
             no shutdown
         exit
@@ -54,6 +37,7 @@ enable
         interface f0/1
             description "-> Site 2"
             ip address 192.168.0.129 255.255.255.252
+            ip ospf 10 area 2
             ip nat inside
             no shutdown
         exit
@@ -61,7 +45,8 @@ enable
         interface s0/1/0
             description "OSPF -> WN_1_RT_4_PD_P"
             ip address 192.168.0.150 255.255.255.252
-            ip ospf authentication key-chain OSPF-Link-5-4
+            ip ospf authentication message-digest
+            ip ospf message-digest-key 1 md5 Test123*
             ip ospf network point-to-point
             clock rate 8000000
             bandwidth 8000
@@ -72,14 +57,14 @@ enable
         interface s0/1/1
             description "OSPF -> WN_1_RT_6_PD_P"
             ip address 192.168.0.157 255.255.255.252
-            ip ospf authentication key-chain OSPF-Link-5-6
+            ip ospf authentication message-digest
+            ip ospf message-digest-key 1 md5 Test123*
             ip ospf network point-to-point
             clock rate 8000000
             bandwidth 8000
             ip ospf 10 area 2
             no shutdown
         exit
-
     end
 
 write memory
