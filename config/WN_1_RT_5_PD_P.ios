@@ -3,6 +3,7 @@
 
 enable
     conf t
+        config-register 2102
         hostname WN_1_RT_5_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
