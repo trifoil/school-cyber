@@ -67,3 +67,4 @@ enable
     end
 
 write memory
+copy run st

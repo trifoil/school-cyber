@@ -25,7 +25,7 @@ username admin privilege 15 secret @0Test123*
 
 ! Set the IP address for the GigabitEthernet0/0 interface
 interface GigabitEthernet0/0/0
- ip address 192.168.0.150 255.255.255.252
+ ip address 192.168.0.138 255.255.255.252 ! modified according to topo globale
  negotiation auto
  no shutdown
 
