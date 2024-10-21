@@ -203,6 +203,9 @@
 - **Router**
 
   - ## Tâches :
+    - Port security : 2 MAC maximum
+    - DHCP snooping : GigabitEthernet 1/0/24 fiable (les autres non)
+    - Dynamic ARP Inspection (DAI) : inspection sur la vlan des utilisateurs, prévention des attaques par flooding
 
 - **Firewall**
 
@@ -226,3 +229,14 @@
 - **Switch** :
 
 ---
+
+### [21/10]
+
+- **Router (WAN1)**
+  - ## Tâches:
+    - Installation des scripts préparés à l'avance
+    - CHangement dans le script, utilisation d'un mot de passe en ```message-diges``` en md5 plutôt qu'une clé chiffrée en sha-256
+
+#### Problèmes rencontrés
+
+- Cables moisis avec connecteurs cassés qui se déconnectent pour aucune raison apparente
