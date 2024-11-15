@@ -20,6 +20,8 @@ enable
         router ospf 10
             router-id 5.5.5.5
             passive-interface f0/1
+            no passive-interface f0/0
+
         end
 
 ! conf interfaces
@@ -29,9 +31,10 @@ enable
             description "Area 0 -> 2.13"
             ip address 192.168.0.66 255.255.255.252
             ip ospf 10 area 0
+            no ip ospf authentication null
             ip ospf authentication message-digest
             ip ospf message-digest-key 1 md5 8uUA646r8ZgRq8i
-            ip nat inside
+            no ip nat inside
             no shutdown
         exit
 
@@ -39,7 +42,7 @@ enable
             description "-> Site 2"
             ip address 192.168.0.129 255.255.255.252
             ip ospf 10 area 2
-            ip nat inside
+            no ip nat inside
             no shutdown
         exit
 
