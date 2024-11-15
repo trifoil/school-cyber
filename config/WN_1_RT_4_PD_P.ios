@@ -3,6 +3,7 @@
 
 enable
     conf t
+        config-register 2102
         hostname WN_1_RT_4_PD_P
         banner motd # Unauthorized access prohibited! #
         clock timezone UTC 2
@@ -29,7 +30,7 @@ enable
             description "-> AG7"
             ip address 192.168.0.137 255.255.255.252
             ip ospf 10 area 2
-            ip nat inside
+            no ip nat inside
             no shutdown
         exit
 
@@ -37,7 +38,7 @@ enable
             description "-> AG5"
             ip address 192.168.0.141 255.255.255.252
             ip ospf 10 area 2
-            ip nat inside
+            no ip nat inside
             no shutdown
         exit
 
