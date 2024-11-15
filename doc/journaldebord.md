@@ -222,20 +222,34 @@
 
 - /
 
-#### Planification des tâches pour le cours suivant
+  #### Planification des tâches pour le cours suivant
 
-- **Router** :
-- **Firewall** :
-- **Switch** :
+  - **Router** : Désactiver les services inutiles + sécurité login + ajout service NTP + Mise en place script WAN1 (création et installation)
+  - **Firewall** : Désactiver les services inutiles + sécurité login + ajout service NTP
+  - **Switch** : Désactiver les services inutiles + sécurité login + ajout service NTP + STP
 
 ---
 
 ### [21/10]
 
 - **Router (WAN1)**
+
   - ## Tâches:
     - Installation des scripts préparés à l'avance
-    - CHangement dans le script, utilisation d'un mot de passe en ```message-diges``` en md5 plutôt qu'une clé chiffrée en sha-256
+    - CHangement dans le script, utilisation d'un mot de passe en `message-diges` en md5 plutôt qu'une clé chiffrée en sha-256
+
+- **Firewall**
+
+  - ## Tâches:
+    - Désactivation des MAJ automatiques
+    - Suppression des services inutiles sur les VLAN
+    - Ajout des logs
+    - Règles AntiVirus
+
+- **Switch**
+  - ## Tâches :
+
+---
 
 #### Problèmes rencontrés
 
