@@ -69,12 +69,15 @@ Unauthorized access to this device is prohibited. All activities will be monitor
 ip domain-name agencesept.com
 crypto key generate rsa modulus 2048
 ip ssh version 2
+ip ssh logging events
 ip ssh time-out 60
 ip ssh authentication-retries 2
 
 ! Implement basic ACL to restrict access
-access-list 10 permit 172.30.30.1  255.255.255.248
-access-list 10 deny any
+ip access-list standard ACL_SSH
+ permit 172.30.30.1 255.255.255.248
+ deny any
+
 
 ! Configure the VTY lines
 line vty 0 4
@@ -84,6 +87,10 @@ line vty 0 4
 
 ! Configure login block
 login block-for 120 attempts 3 within 60
+
+logging buffered 4096 debugging
+logging console warnings
+
 
  ! Save the configuration
 end
