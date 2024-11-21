@@ -1,0 +1,298 @@
+Building configuration...
+
+Current configuration : 7786 bytes
+!
+! Last configuration change at 15:06:12 UTC Mon Nov 18 2024
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname AG_7_S2_PD_P
+!
+boot-start-marker
+boot-end-marker
+!
+logging console emergencies
+enable secret 5 $1$nG0N$1S46ayKJ3PCiQfUr.Re0E0
+enable password Identifiants
+!
+username admin privilege 15 secret 9 $9$HfJx.gBm497wcZ$FNqMyuDomIQ725Oy.b2RvoA8dEgcmXWN4Qv19Eek/tg
+no aaa new-model
+switch 1 provision c1000-24t-4g-l
+system mtu routing 1500
+ip arp inspection vlan 10
+!
+!
+ip dhcp snooping vlan 10,30,50
+ip dhcp snooping
+ip domain-name agencesept.com
+login on-success log
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2431535744
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2431535744
+ revocation-check none
+ rsakeypair TP-self-signed-2431535744
+!
+!
+crypto pki certificate chain TP-self-signed-2431535744
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32343331 35333537 3434301E 170D3234 31303031 31323037 
+  31345A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 34333135 
+  33353734 3430819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  81009E8D 9DC8CF0C 47F7290D FCA430FC 85D09A86 61755FD8 ECB77FCE 408B2AFE 
+  4ED8DB53 517E3A79 8A0DD124 49A85290 4D23ABA6 715C0CE6 3C9300A0 7C5CB014 
+  DA55BDA8 17CBA280 36A8120E 24C64155 3A1B7953 A4CB01D3 148DB0E3 3CAA1315 
+  3307EE57 8DCA0AAF 9B630681 73ADD880 E9E8D5D6 1CE51E02 A9AE4686 8DC8A106 
+  09750203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14AAE6A6 6564428D C0F48C63 680448F4 F71A9365 A3301D06 
+  03551D0E 04160414 AAE6A665 64428DC0 F48C6368 0448F4F7 1A9365A3 300D0609 
+  2A864886 F70D0101 05050003 81810070 267CEE66 5152E5FA 9A481595 BB95E213 
+  20F59DC6 EEC03D7B EB0AD7DE E155B199 5B3C1CCB 1900B557 13A573D5 6B8BFA5A 
+  3CCE3D5B F845D94F A2936537 E38CDE6D 37DA5A28 BDDA01D6 9B733A2F CBC827EC 
+  84D3DB6F BA5BD534 AB0509A0 22412CCE 90546BFA 2614A25D 26BFE6FD 0E98F767 
+  40E234D5 C95EBE64 E12BA5FB E153D4
+  	quit
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/5
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security maximum 2
+ switchport port-security violation restrict
+ switchport port-security
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 50
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 50
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 50
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 50
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 30
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 30
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 30
+ switchport mode access
+ ip dhcp snooping limit rate 10
+!
+interface GigabitEthernet1/0/24
+ switchport trunk allowed vlan 10,30,50
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet1/0/25
+ switchport access vlan 100
+ shutdown
+!
+interface GigabitEthernet1/0/26
+ switchport access vlan 100
+ shutdown
+!
+interface GigabitEthernet1/0/27
+ switchport access vlan 100
+ shutdown
+!
+interface GigabitEthernet1/0/28
+ switchport access vlan 100
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 172.30.10.1 255.255.254.0
+!
+interface Vlan30
+ ip address 172.30.30.2 255.255.255.0
+!
+interface Vlan50
+ ip address 172.30.50.1 255.255.255.0
+!
+ip default-gateway 172.30.0.1
+ip http server
+ip http banner
+ip http secure-server
+ip ssh time-out 60
+ip ssh logging events
+ip ssh version 2
+!
+!
+!
+banner motd ^CUnauthorized access to this device is prohibited!^C
+!
+line con 0
+ exec-timeout 0 0
+ stopbits 1
+line vty 0 4
+ password @0Test123*
+ login local
+ transport input ssh
+line vty 5 15
+ no login
+ transport input none
+!
+end
