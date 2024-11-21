@@ -13,12 +13,12 @@ enable secret @0Test123*
 ! Configure the console password
 line console 0
  password @CiscoTest123*
- login
+ login local
 
 ! Configure the VTY lines password
 line vty 0 4
  password @CiscoTest123*
- login
+ login 
 
 ! Create an admin user
 username admin privilege 15 secret @0Test123*
@@ -26,12 +26,14 @@ username admin privilege 15 secret @0Test123*
 ! Set the IP address for the GigabitEthernet0/0 interface
 interface GigabitEthernet0/0/0
  ip address 192.168.0.138 255.255.255.252 ! modified according to topo globale
+ !ip nat outside
  negotiation auto
  no shutdown
 
 ! Set the IP address for the GigabitEthernet0/1 interface
 interface GigabitEthernet0/0/1
  ip address 172.30.200.1 255.255.255.252
+ !ip nat inside
  negotiation auto
  no shutdown
 
@@ -46,7 +48,8 @@ interface GigabitEthernet0/0/3
  shutdown
 
 ! Configure a default route
-ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0
+ip route 0.0.0.0 0.0.0.0 192.168.0.137
+no ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0
 
 ! Enable HTTP and HTTPS servers
 ip http server
