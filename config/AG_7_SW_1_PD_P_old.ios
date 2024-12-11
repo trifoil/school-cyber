@@ -185,6 +185,10 @@ exit
 ! Switch(config-if)# no ip arp inspection trust
 
 
+! port mirroring
+
+interface GigabitEthernet 1/0/1
+no switchport mode access
 
 end
 
@@ -194,3 +198,4 @@ show ip dhcp snooping
 show ip arp inspection
 
 write memory
+

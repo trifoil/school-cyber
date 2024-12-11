@@ -111,3 +111,18 @@ Management Network Interface:
 GigabitEthernet1/0/20
 ```
 
+
+
+
+
+A rajouter 
+
+IPSG
+Verifier la limite de dhcp snooping 100 au lieu de 10 dans la doc cisco ??
+
+STP
+
+Port security
+
+VTP
+

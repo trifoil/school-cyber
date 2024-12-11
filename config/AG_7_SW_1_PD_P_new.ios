@@ -1,0 +1,182 @@
+! DEFAULT CONFIGURATION
+configure terminal
+
+! Set the hostname
+hostname AG_7_SW_1_PD_P
+
+! Enable password encryption service
+service password-encryption
+
+! Set the enable secret password
+enable secret @0Test123*
+
+! Configure the console password
+line console 0
+ password @CiscoTest123*
+ login
+
+! Configure the VTY lines password
+line vty 0 4
+ password @CiscoTest123*
+ login
+
+! Create an admin user
+username admin privilege 15 secret @0Test123*
+
+! Enable HTTP and HTTPS servers
+ip http server
+ip http secure-server
+ip http authentication local
+
+! Configure HTTP access control
+access-list 1 permit 172.30.30.1  255.255.255.248
+access-list 1 deny any
+ip http access-class 1
+
+! Configure a security banner
+banner motd ^C
+Unauthorized access to this device is prohibited. All activities will be monitored and reported.
+^C
+
+! Configure SSH
+ip domain-name agencesept.com
+crypto key generate rsa modulus 2048
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+
+! Implement basic ACL to restrict access
+access-list 10 permit 172.30.30.1  255.255.255.248
+access-list 10 deny any
+
+! Apply ACL to VTY lines and enable SSH
+line vty 0 4
+ access-class 10 in
+ transport input ssh
+ login local
+
+! Configure login blocking to prevent brute-force attacks
+login block-for 120 attempts 3 within 60
+
+! VLAN Configuration
+vlan 10
+name Users
+exit
+vlan 30
+name Management
+exit
+vlan 50
+name Servers
+exit
+
+! Assign IP addresses to VLANs
+interface vlan 10
+ip address 172.30.10.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 172.30.30.1 255.255.255.0
+no shutdown
+exit
+
+interface vlan 50
+ip address 172.30.50.1 255.255.255.0
+no shutdown
+exit
+
+! Create VLAN 100 if it doesn't already exist
+vlan 100
+name Unassigned
+exit
+
+! Move interfaces to VLAN 100 and shut them down
+interface range GigabitEthernet1/0/25-28
+switchport access vlan 100
+shutdown
+exit
+
+! Remove VLAN 100 from the VLAN database (deactivate VLAN 100)
+no vlan 100
+
+! Save the configuration
+write memory
+
+! Users VLAN configuration with port security
+interface range GigabitEthernet1/0/1-16
+switchport mode access
+switchport access vlan 10
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+exit
+
+! Servers VLAN configuration with port security
+interface range GigabitEthernet1/0/17-20
+switchport mode access
+switchport access vlan 50
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+exit
+
+! Management VLAN configuration with port security
+interface range GigabitEthernet1/0/21-23
+switchport mode access
+switchport access vlan 30
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+exit
+
+! Configure trunk port for communication with other switches and devices
+interface GigabitEthernet1/0/24
+switchport mode trunk
+switchport trunk allowed vlan 10,30,50
+ip dhcp snooping trust  ! Mark trunk as trusted for DHCP snooping
+no shutdown
+exit
+
+! DHCP Snooping Configuration
+ip dhcp snooping
+ip dhcp snooping vlan 10
+ip dhcp snooping vlan 30
+ip dhcp snooping vlan 50
+
+! Limit DHCP requests to prevent starvation attacks
+interface range GigabitEthernet1/0/1-23
+ip dhcp snooping limit rate 10
+exit
+
+! Dynamic ARP Inspection (DAI) Configuration
+ip arp inspection vlan 10
+
+! Prevent ARP flooding attacks
+interface range GigabitEthernet1/0/1-16
+ip arp inspection limit rate 15
+exit
+
+! Configure port mirroring for traffic analysis
+monitor session 1 source interface GigabitEthernet1/0/2
+monitor session 1 destination interface GigabitEthernet1/0/1
+
+! Spanning Tree Protocol (STP) Configuration
+spanning-tree mode rapid-pvst  ! Enable Rapid-PVST
+spanning-tree extend system-id
+
+! Enable BPDU guard globally to protect against rogue switches
+spanning-tree portfast bpduguard default
+
+! Enable PortFast on all access ports
+interface range GigabitEthernet1/0/1-23
+spanning-tree portfast
+exit
+
+! VLAN Trunking Protocol (VTP) Configuration
+vtp domain AG_7  ! Set VTP domain
+vtp mode server  ! Configure as VTP server
+vtp password SecureVTP  ! Secure VTP configuration
+
+! Save Configuration
+end
+write memory
